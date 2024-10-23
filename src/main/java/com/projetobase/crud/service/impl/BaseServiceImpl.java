@@ -12,15 +12,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class BaseServiceImpl<T extends BaseModel<ID>,
-                             ID extends Serializable,
+public class BaseServiceImpl<
+                             T extends BaseModel<ID>,
                              D extends BaseDTO<ID>,
-                             M extends BaseMapper<T, ID, D>,
-                             R extends BaseRepository<T, ID>
-                            > implements BaseService<T, ID, D, R> {
+                             ID extends Serializable
+                            > implements BaseService<D, ID> {
 
-    private final R _repository;
-    private final M _mapper;
+    private final BaseRepository<T, ID> _repository;
+    private final BaseMapper<T, ID, D> _mapper;
 
     @Override
     public List<D> getAll() {

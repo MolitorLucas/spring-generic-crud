@@ -7,7 +7,7 @@ import com.projetobase.crud.repository.BaseRepository;
 import java.io.Serializable;
 import java.util.List;
 
-public interface BaseService<T extends BaseModel<ID>, ID extends Serializable, D extends BaseDTO<ID>, R extends BaseRepository<T, ID>> {
+public interface BaseService<D extends BaseDTO<ID>, ID extends Serializable> {
 
     List<D> getAll();
     D getById(ID id);
