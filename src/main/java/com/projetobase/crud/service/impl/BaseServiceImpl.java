@@ -10,7 +10,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Optional;
 
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 public class BaseServiceImpl<
@@ -46,11 +48,16 @@ public class BaseServiceImpl<
 
     @Override
     public D update(ID id, D dto) {
-        T entity = this._repository.findById(id).orElseThrow(RuntimeException::new);
-
-        return this._mapper.toDTO(
-                this._repository.save(this._mapper.toEntity(dto))
-        );
+        Optional<T> entityOptional = this._repository.findById(id);
+        if (entityOptional.isPresent()) {
+            T entity = this._mapper.toEntity(dto);
+            entity.setId(id);
+            return this._mapper.toDTO(
+                    this._repository.save(entity)
+            );
+        }
+        throw new RuntimeException("Objeto do tipo " + ((Class<T>) ((ParameterizedType) getClass()
+                .getGenericSuperclass()).getActualTypeArguments()[0]).getTypeName() + " não encontrado");
     }
 
     @Override
