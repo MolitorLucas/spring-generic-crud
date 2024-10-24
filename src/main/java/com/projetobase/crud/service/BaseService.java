@@ -1,8 +1,7 @@
 package com.projetobase.crud.service;
 
 import com.projetobase.crud.dto.BaseDTO;
-import com.projetobase.crud.model.BaseModel;
-import com.projetobase.crud.repository.BaseRepository;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;

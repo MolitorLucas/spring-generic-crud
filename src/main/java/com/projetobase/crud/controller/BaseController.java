@@ -1,8 +1,6 @@
 package com.projetobase.crud.controller;
 
 import com.projetobase.crud.dto.BaseDTO;
-import com.projetobase.crud.model.BaseModel;
-import com.projetobase.crud.repository.BaseRepository;
 import org.springframework.http.ResponseEntity;
 
 import java.io.Serializable;

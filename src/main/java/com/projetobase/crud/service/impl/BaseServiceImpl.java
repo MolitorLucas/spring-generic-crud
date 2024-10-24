@@ -3,23 +3,26 @@ package com.projetobase.crud.service.impl;
 import com.projetobase.crud.dto.BaseDTO;
 import com.projetobase.crud.mapper.BaseMapper;
 import com.projetobase.crud.model.BaseModel;
-import com.projetobase.crud.repository.BaseRepository;
 import com.projetobase.crud.service.BaseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
-@RequiredArgsConstructor
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 public class BaseServiceImpl<
                              T extends BaseModel<ID>,
                              D extends BaseDTO<ID>,
                              ID extends Serializable
                             > implements BaseService<D, ID> {
 
-    private final BaseRepository<T, ID> _repository;
-    private final BaseMapper<T, ID, D> _mapper;
+    @Autowired
+    protected JpaRepository<T, ID> _repository;
+    @Autowired
+    protected BaseMapper<T, ID, D> _mapper;
 
     @Override
     public List<D> getAll() {
